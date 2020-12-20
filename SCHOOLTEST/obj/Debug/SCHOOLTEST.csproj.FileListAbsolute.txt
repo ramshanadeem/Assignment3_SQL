@@ -1,0 +1,13 @@
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\obj\Debug\SCHOOLTEST.csproj.CoreCompileInputs.cache
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\SCHOOLTEST.exe.config
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\SCHOOLTEST.exe
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\SCHOOLTEST.pdb
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\SCHOOLDATA.dll
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\EntityFramework.dll
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\SCHOOLDATA.pdb
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\SCHOOLDATA.dll.config
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\bin\Debug\EntityFramework.xml
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\obj\Debug\SCHOOLTEST.csprojAssemblyReference.cache
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\obj\Debug\SCHOOLTEST.csproj.CopyComplete
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\obj\Debug\SCHOOLTEST.exe
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLTEST\obj\Debug\SCHOOLTEST.pdb

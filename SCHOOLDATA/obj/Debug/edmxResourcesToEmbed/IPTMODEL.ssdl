@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Result20">
+    <Key>
+      <PropertyRef Name="RollNumber" />
+    </Key>
+    <Property Name="RollNumber" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="PassingYear" Type="int" Nullable="false" />
+    <Property Name="Grades" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SalaryDetails">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="AccountNumber" Type="int" Nullable="false" />
+    <Property Name="Salary" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="RollNumber" />
+    </Key>
+    <Property Name="RollNumber" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="FatherName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Address" Type="varchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="bit" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeachersInfo">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="TeacherName" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Subject" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ContactNumber" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Result20_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Result20" Type="Self.Result20" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="RollNumber" />
+      </Principal>
+      <Dependent Role="Result20">
+        <PropertyRef Name="RollNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Fk_SalaryDetails_TeachersInfo">
+    <End Role="TeachersInfo" Type="Self.TeachersInfo" Multiplicity="1" />
+    <End Role="SalaryDetails" Type="Self.SalaryDetails" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TeachersInfo">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="SalaryDetails">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolModelStoreContainer">
+    <EntitySet Name="Result20" EntityType="Self.Result20" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TeachersInfo" EntityType="Self.TeachersInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Result20_Student" Association="Self.FK_Result20_Student">
+      <End Role="Student" EntitySet="Student" />
+      <End Role="Result20" EntitySet="Result20" />
+    </AssociationSet>
+    <AssociationSet Name="Fk_SalaryDetails_TeachersInfo" Association="Self.Fk_SalaryDetails_TeachersInfo">
+      <End Role="TeachersInfo" EntitySet="TeachersInfo" />
+      <End Role="SalaryDetails" EntitySet="SalaryDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

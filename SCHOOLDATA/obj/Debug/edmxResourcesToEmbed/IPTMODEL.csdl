@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Result20">
+    <Key>
+      <PropertyRef Name="RollNumber" />
+    </Key>
+    <Property Name="RollNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PassingYear" Type="Int32" Nullable="false" />
+    <Property Name="Grades" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Result20_Student" FromRole="Result20" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="SalaryDetail">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TeachersInfo" Relationship="Self.Fk_SalaryDetails_TeachersInfo" FromRole="SalaryDetails" ToRole="TeachersInfo" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="RollNumber" />
+    </Key>
+    <Property Name="RollNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FatherName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Result20" Relationship="Self.FK_Result20_Student" FromRole="Student" ToRole="Result20" />
+  </EntityType>
+  <EntityType Name="TeachersInfo">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TeacherName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContactNumber" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SalaryDetail" Relationship="Self.Fk_SalaryDetails_TeachersInfo" FromRole="TeachersInfo" ToRole="SalaryDetails" />
+  </EntityType>
+  <Association Name="FK_Result20_Student">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="Result20" Type="Self.Result20" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="RollNumber" />
+      </Principal>
+      <Dependent Role="Result20">
+        <PropertyRef Name="RollNumber" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Fk_SalaryDetails_TeachersInfo">
+    <End Role="TeachersInfo" Type="Self.TeachersInfo" Multiplicity="1" />
+    <End Role="SalaryDetails" Type="Self.SalaryDetail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TeachersInfo">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="SalaryDetails">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Result20" EntityType="Self.Result20" />
+    <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetail" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="TeachersInfoes" EntityType="Self.TeachersInfo" />
+    <AssociationSet Name="FK_Result20_Student" Association="Self.FK_Result20_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="Result20" EntitySet="Result20" />
+    </AssociationSet>
+    <AssociationSet Name="Fk_SalaryDetails_TeachersInfo" Association="Self.Fk_SalaryDetails_TeachersInfo">
+      <End Role="TeachersInfo" EntitySet="TeachersInfoes" />
+      <End Role="SalaryDetails" EntitySet="SalaryDetails" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

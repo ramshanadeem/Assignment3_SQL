@@ -1,0 +1,11 @@
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\obj\Debug\SCHOOLDATA.csproj.CoreCompileInputs.cache
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\SCHOOLDATA.dll.config
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\SCHOOLDATA.dll
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\SCHOOLDATA.pdb
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\EntityFramework.dll
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\EntityFramework.xml
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\obj\Debug\SCHOOLDATA.csproj.CopyComplete
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\obj\Debug\SCHOOLDATA.dll
+C:\Users\USER\Source\Repos\server-plus-sql\SCHOOLDATA\obj\Debug\SCHOOLDATA.pdb

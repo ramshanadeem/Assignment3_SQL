@@ -1,0 +1,106 @@
+﻿USE [School]
+GO
+/****** Object:  Table [dbo].[Result20]    Script Date: 20-Dec-20 2:06:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Result20](
+	[RollNumber] [varchar](10) NOT NULL,
+	[PassingYear] [int] NOT NULL,
+	[Grades] [varchar](10) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RollNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[SalaryDetails]    Script Date: 20-Dec-20 2:06:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[SalaryDetails](
+	[TeacherId] [varchar](10) NOT NULL,
+	[AccountNumber] [int] NOT NULL,
+	[Salary] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[TeacherId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [unique_SalaryDetails] UNIQUE NONCLUSTERED 
+(
+	[AccountNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Student]    Script Date: 20-Dec-20 2:06:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Student](
+	[RollNumber] [varchar](10) NOT NULL,
+	[Name] [varchar](25) NOT NULL,
+	[FatherName] [varchar](25) NOT NULL,
+	[Address] [varchar](max) NOT NULL,
+	[Gender] [bit] NULL,
+	[PhoneNumber] [varchar](11) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RollNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[TeachersInfo]    Script Date: 20-Dec-20 2:06:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[TeachersInfo](
+	[TeacherId] [varchar](10) NOT NULL,
+	[TeacherName] [varchar](25) NOT NULL,
+	[Gender] [varchar](20) NOT NULL,
+	[Subject] [varchar](20) NOT NULL,
+	[Status] [varchar](20) NOT NULL,
+	[ContactNumber] [int] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[TeacherId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+ CONSTRAINT [unique_TeacherInfo] UNIQUE NONCLUSTERED 
+(
+	[ContactNumber] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Result20]  WITH CHECK ADD  CONSTRAINT [FK_Result20_Student] FOREIGN KEY([RollNumber])
+REFERENCES [dbo].[Student] ([RollNumber])
+GO
+ALTER TABLE [dbo].[Result20] CHECK CONSTRAINT [FK_Result20_Student]
+GO
+ALTER TABLE [dbo].[SalaryDetails]  WITH CHECK ADD  CONSTRAINT [Fk_SalaryDetails_TeachersInfo] FOREIGN KEY([TeacherId])
+REFERENCES [dbo].[TeachersInfo] ([TeacherId])
+GO
+ALTER TABLE [dbo].[SalaryDetails] CHECK CONSTRAINT [Fk_SalaryDetails_TeachersInfo]
+GO

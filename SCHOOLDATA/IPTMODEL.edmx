@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Result20">
+          <Key>
+            <PropertyRef Name="RollNumber" />
+          </Key>
+          <Property Name="RollNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="PassingYear" Type="int" Nullable="false" />
+          <Property Name="Grades" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalaryDetails">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AccountNumber" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="RollNumber" />
+          </Key>
+          <Property Name="RollNumber" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="FatherName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="Gender" Type="bit" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="11" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeachersInfo">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TeacherName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Subject" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ContactNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Result20_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Result20" Type="Self.Result20" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="RollNumber" />
+            </Principal>
+            <Dependent Role="Result20">
+              <PropertyRef Name="RollNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_SalaryDetails_TeachersInfo">
+          <End Role="TeachersInfo" Type="Self.TeachersInfo" Multiplicity="1" />
+          <End Role="SalaryDetails" Type="Self.SalaryDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TeachersInfo">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="SalaryDetails">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolModelStoreContainer">
+          <EntitySet Name="Result20" EntityType="Self.Result20" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeachersInfo" EntityType="Self.TeachersInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Result20_Student" Association="Self.FK_Result20_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Result20" EntitySet="Result20" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_SalaryDetails_TeachersInfo" Association="Self.Fk_SalaryDetails_TeachersInfo">
+            <End Role="TeachersInfo" EntitySet="TeachersInfo" />
+            <End Role="SalaryDetails" EntitySet="SalaryDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Result20">
+          <Key>
+            <PropertyRef Name="RollNumber" />
+          </Key>
+          <Property Name="RollNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PassingYear" Type="Int32" Nullable="false" />
+          <Property Name="Grades" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Result20_Student" FromRole="Result20" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="SalaryDetail">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountNumber" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TeachersInfo" Relationship="Self.Fk_SalaryDetails_TeachersInfo" FromRole="SalaryDetails" ToRole="TeachersInfo" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="RollNumber" />
+          </Key>
+          <Property Name="RollNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FatherName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Result20" Relationship="Self.FK_Result20_Student" FromRole="Student" ToRole="Result20" />
+        </EntityType>
+        <EntityType Name="TeachersInfo">
+          <Key>
+            <PropertyRef Name="TeacherId" />
+          </Key>
+          <Property Name="TeacherId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TeacherName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Subject" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContactNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SalaryDetail" Relationship="Self.Fk_SalaryDetails_TeachersInfo" FromRole="TeachersInfo" ToRole="SalaryDetails" />
+        </EntityType>
+        <Association Name="FK_Result20_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Result20" Type="Self.Result20" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="RollNumber" />
+            </Principal>
+            <Dependent Role="Result20">
+              <PropertyRef Name="RollNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_SalaryDetails_TeachersInfo">
+          <End Role="TeachersInfo" Type="Self.TeachersInfo" Multiplicity="1" />
+          <End Role="SalaryDetails" Type="Self.SalaryDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="TeachersInfo">
+              <PropertyRef Name="TeacherId" />
+            </Principal>
+            <Dependent Role="SalaryDetails">
+              <PropertyRef Name="TeacherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Result20" EntityType="Self.Result20" />
+          <EntitySet Name="SalaryDetails" EntityType="Self.SalaryDetail" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="TeachersInfoes" EntityType="Self.TeachersInfo" />
+          <AssociationSet Name="FK_Result20_Student" Association="Self.FK_Result20_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Result20" EntitySet="Result20" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_SalaryDetails_TeachersInfo" Association="Self.Fk_SalaryDetails_TeachersInfo">
+            <End Role="TeachersInfo" EntitySet="TeachersInfoes" />
+            <End Role="SalaryDetails" EntitySet="SalaryDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer" CdmEntityContainer="SchoolEntities">
+          <EntitySetMapping Name="Result20">
+            <EntityTypeMapping TypeName="SchoolModel.Result20">
+              <MappingFragment StoreEntitySet="Result20">
+                <ScalarProperty Name="RollNumber" ColumnName="RollNumber" />
+                <ScalarProperty Name="PassingYear" ColumnName="PassingYear" />
+                <ScalarProperty Name="Grades" ColumnName="Grades" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalaryDetails">
+            <EntityTypeMapping TypeName="SchoolModel.SalaryDetail">
+              <MappingFragment StoreEntitySet="SalaryDetails">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="SchoolModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="RollNumber" ColumnName="RollNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeachersInfoes">
+            <EntityTypeMapping TypeName="SchoolModel.TeachersInfo">
+              <MappingFragment StoreEntitySet="TeachersInfo">
+                <ScalarProperty Name="TeacherId" ColumnName="TeacherId" />
+                <ScalarProperty Name="TeacherName" ColumnName="TeacherName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
